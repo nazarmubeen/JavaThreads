@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 class Processor implements Runnable {
 	private CountDownLatch latch;
@@ -18,37 +19,46 @@ class Processor implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Started ."+name+" "+Date.from(Instant.now()).toString());
-	//	System.out.println("latch countdown of "+name+" ");
-		
+		System.out.println("current latch count at start "+latch.getCount());
 		try {
-			Thread.sleep(3000);
+			System.out.println(name+" working on task");
+		//	Thread.sleep(300);
+			//used to reduce countdown of latch by one
+			latch.countDown();
+			System.out.println("current latch count at end "+latch.getCount());
+			//used main thread to wait for number of countdown latch
+			//Causes the current thread to wait until the latch has counted down to
+		     //* zero
+			latch.await();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//used to reduce countdown of latch by one
-		latch.countDown();
+		
 	}
+	
+	
 
 }
 
 public class App {
 
 	public static void main(String[] args) throws InterruptedException {
-		//used to initialize countdown latch
-		CountDownLatch latch = new CountDownLatch(3);
+		//used to initialize countdown latch here 2
+		CountDownLatch latch = new CountDownLatch(2);
 
-		ExecutorService executos = Executors.newFixedThreadPool(3);
+		//start executerservice
+		ExecutorService executerService = Executors.newFixedThreadPool(3);
 
 		for (int i = 0; i < 10; i++) {
-			executos.submit(new Processor(latch,"A "+i));
+			//submit services
+			System.out.println(" service number "+i);
+			executerService.submit(new Processor(latch,"A "+i));
 		}
 		
-		
-		System.out.println("waiting for thread to complete");
-		//used main thread to wait for number of countdown latch
-		latch.await();
-		System.out.println("Completed all count down threads starting for rest");
+		System.out.println("In Main thread:waiting for thread to complete");
+	
+		System.out.println("In Main thread:Completed all count down threads starting for rest");
 		
 	}
 

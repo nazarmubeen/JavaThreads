@@ -39,7 +39,7 @@ public class App {
 		
 		executor.shutdown();
 		
-		System.out.println("All Tasks submitted");
+		System.out.println("All thread Tasks submitted");
 		try {
 			executor.awaitTermination(1, TimeUnit.DAYS);
 		} catch (InterruptedException e) {
@@ -47,7 +47,7 @@ public class App {
 			e.printStackTrace();
 		}
 		
-		System.out.println("All Tasks complets :");
+		System.out.println("closing main method");
 	}
 
 }

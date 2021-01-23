@@ -5,6 +5,7 @@ import java.util.concurrent.Semaphore;
 public class Connection {
 	//only one instance throughout all objects
 	private static Connection INSTANCE=null;
+
 	private static int connections;
 
 	//Semaphore(MAX_AVAILABLE, true);
@@ -12,21 +13,21 @@ public class Connection {
 	private static Semaphore sem; 
  
 	//constructor
-	private Connection() {
-		sem = new Semaphore(10,true);
+	private Connection(int connectionsNo) {
+		sem = new Semaphore(connectionsNo,true);
 		connections = 0;
 	}
 
 	//if instance is not present new instance will be initialized else 
 	// already existing instance will be returned
-	public static Connection getInstance() {
+	public static Connection getInstance(int connectionsNo) {
 		
 		if(INSTANCE==null)
 		{
-			INSTANCE = new Connection();
+			INSTANCE = new Connection(connectionsNo);
 		}
-		
-		
+
+
 		return INSTANCE;
 	}
 	

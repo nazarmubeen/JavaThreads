@@ -1,9 +1,8 @@
 package Threadconcepts;
 
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import com.sun.corba.se.impl.presentation.rmi.IDLTypeException;
 
 public class ProducerConsumerProblem2 {
 
@@ -79,7 +78,7 @@ public class ProducerConsumerProblem2 {
     }
 
     public static void main(String[] args)
-    throws IDLTypeException, InterruptedException {
+    throws InterruptedException {
 
         // Start producers and consumers
         int numProducers = 2;

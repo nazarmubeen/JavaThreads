@@ -8,9 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class App {
 
 	public static void main(String[] args)throws Exception {
-		
-		
-		
+
 		ExecutorService exService = Executors.newCachedThreadPool();
 		
 		for(int i = 0 ;  i < 10; i ++){
@@ -20,7 +18,7 @@ public class App {
 				@Override
 				public void run() {
 					//to get an instance of a connection and calling connect method
-					Connection.getInstance().connect(Thread.currentThread());				
+					Connection.getInstance(10).connect(Thread.currentThread());
 				}
 			},"Thread No "+i);
 			

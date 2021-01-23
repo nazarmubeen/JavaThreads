@@ -27,15 +27,10 @@ public class Processor {
 			notify();
 			Thread.sleep(2000);
 		}
-		
-		
-		
 	}
 	
 	public void fillArray() throws InterruptedException 
 	{
-	
 		wait();
-		
 	}
 }
